@@ -29,7 +29,7 @@ jobs:
       - name: install dependencies
         run: pip install -r requirements.txt
       - name: Download all workflow run artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
       - name: first_test
         if: "github.event.inputs.deployment_target == 'first_test'" --alluredir=allure-results
         run: pytest tests/test_button.py::test_button_exist
