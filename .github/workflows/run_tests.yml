@@ -28,8 +28,8 @@ jobs:
         run: sudo apt-get install google-chrome-stable
       - name: install dependencies
         run: pip install -r requirements.txt
-      - name: Download all workflows run artifacts
-        uses: actions/download-artifact@v4
+      - name: Download all workflow run artifacts
+        uses: actions/download-artifact@v5
       - name: first_test
         if: "github.event.inputs.deployment_target == 'first_test'" --alluredir=allure-results
         run: pytest tests/test_button.py::test_button_exist
@@ -57,7 +57,7 @@ jobs:
         with:
            distribution: 'microsoft' # See 'Supported distributions' for available options
            java-version: '17'
-      - run: sudo wget https://github.com/allure-framework/allure2/releases/download/2.23.1/allure-2.23.1.tgz && sudo tar -zxvf allure-2.23.1.tgz -C /opt/ && sudo ln -s /opt/allure-2.23.1/bin/allure /usr/bin/allure
+      - run: sudo wget https://github.com/allure-framework/allure2/releases/download/2.25.1/allure-2.25.1.tgz && sudo tar -zxvf allure-2.25.1.tgz -C /opt/ && sudo ln -s /opt/allure-2.25.1/bin/allure /usr/bin/allure
       - name: Download all workflow run artifacts
         uses: actions/download-artifact@v4
       - run: allure generate -c allure-results -o _site
@@ -75,7 +75,7 @@ jobs:
     name: Report publication
     steps:
       - name: Download all workflow run artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v3
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v2
       - name: Deploy to GitHub Pages
