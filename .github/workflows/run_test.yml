@@ -28,9 +28,14 @@ jobs:
         run: sudo apt-get install google-chrome-stable
       - name: install dependencies
         run: pip install -r requirements.txt
+      - name: Download all workflow run artifacts
+        uses: actions/download-artifact@v3
       - name: first_test
         if: "github.event.inputs.deployment_target == 'first_test'"
         run: pytest tests/test_button.py::test_button_exist
       - name: second_test
         if: "github.event.inputs.deployment_target == 'second_test'"
         run: pytest tests/test_button.py::test_button_exist_2
+      - name: all
+        if: "github.event.inputs.deployment_target == 'all'"
+        run: pytest
